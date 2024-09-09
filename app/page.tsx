@@ -1,17 +1,34 @@
 "use client";
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { BarChart2, Code, Database, Github, Linkedin, Mail, Send, Smartphone } from 'lucide-react'
 import GradualSpacing from "@/components/magicui/gradual-spacing";
+import { useTheme } from "next-themes"
+import { Menu, Moon, Sun } from 'lucide-react'
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+
+
+
 
 export default function Portfolio() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,23 +40,77 @@ export default function Portfolio() {
     setMessage('')
   }
 
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+
+  if (!mounted) return null
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Floating Navbar */}
-      <header className="fixed top-6 left-0 right-0 z-50 flex justify-center">
-        <nav className="bg-background/80 backdrop-blur-md rounded-full px-6 py-3 shadow-lg">
-          <ul className="flex space-x-8">
-            <li><a href="#" className="text-sm font-medium hover:text-primary transition-colors">Home</a></li>
-            <li><a href="#timeline" className="text-sm font-medium hover:text-primary transition-colors">Education & Experience</a></li>
-            <li><a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">Skills</a></li>
-            <li><a href="#projects" className="text-sm font-medium hover:text-primary transition-colors">Projects</a></li>
-            <li><a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a></li>
-          </ul>
-        </nav>
+      <header className="fixed top-6 left-0 right-0 z-50 px-6">
+        <div className="max-w-7xl mx-auto flex justify-between items-center md:justify-center">
+          <div className="md:absolute md:left-6">
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="bg-background/80 backdrop-blur-md shadow-lg md:hidden">
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Open menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col h-full">
+                  <div className="flex-grow py-6">
+                    <ul className="space-y-4">
+                      <li><a href="#" className="block px-4 py-2 text-lg hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>Home</a></li>
+                      <li><a href="#timeline" className="block px-4 py-2 text-lg hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>Education & Experience</a></li>
+                      <li><a href="#skills" className="block px-4 py-2 text-lg hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>Skills</a></li>
+                      <li><a href="#projects" className="block px-4 py-2 text-lg hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>Projects</a></li>
+                      <li><a href="#contact" className="block px-4 py-2 text-lg hover:bg-accent rounded-md" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
+                    </ul>
+                  </div>
+                  <div className="py-6 flex justify-between items-center border-t">
+                    <span className="text-sm text-muted-foreground">© 2023 Your Name</span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={toggleTheme}
+                      className="bg-background/80 backdrop-blur-md shadow-lg"
+                    >
+                      {theme === 'dark' ? <Sun className="h-[1.2rem] w-[1.2rem]" /> : <Moon className="h-[1.2rem] w-[1.2rem]" />}
+                      <span className="sr-only">Toggle theme</span>
+                    </Button>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
+          <nav className="hidden md:block bg-background/80 backdrop-blur-md rounded-full px-6 py-3 shadow-lg">
+            <ul className="flex space-x-8">
+              <li><a href="#" className="text-sm font-medium hover:text-primary transition-colors">Home</a></li>
+              <li><a href="#timeline" className="text-sm font-medium hover:text-primary transition-colors">Education & Experience</a></li>
+              <li><a href="#skills" className="text-sm font-medium hover:text-primary transition-colors">Skills</a></li>
+              <li><a href="#projects" className="text-sm font-medium hover:text-primary transition-colors">Projects</a></li>
+              <li><a href="#contact" className="text-sm font-medium hover:text-primary transition-colors">Contact</a></li>
+            </ul>
+          </nav>
+          <div className="md:absolute md:right-6">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={toggleTheme}
+              className="bg-background/80 backdrop-blur-md shadow-lg"
+            >
+              {theme === 'dark' ? <Sun className="h-[1.2rem] w-[1.2rem]" /> : <Moon className="h-[1.2rem] w-[1.2rem]" />}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </div>
+        </div>
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-32 text-center h-screen flex flex-col justify-center items-center">
+      <section className="container mx-auto px-4 py-32 text-center h-screen flex flex-col justify-center items-center bg-cover">
         <GradualSpacing
           className="font-display text-center text-4xl font-bold tracking-[-0.1em]  text-black dark:text-white md:text-7xl md:leading-[5rem]"
           text="Joshua Philip"
