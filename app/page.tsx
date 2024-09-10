@@ -9,11 +9,9 @@ import { BarChart2, Code, Database, Github, Linkedin, Mail, Send, Smartphone } f
 import GradualSpacing from "@/components/magicui/gradual-spacing";
 import { useTheme } from "next-themes"
 import { Menu, Moon, Sun } from 'lucide-react'
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import Timeline from './timeline'
+
 
 
 export default function Portfolio() {
@@ -23,6 +21,13 @@ export default function Portfolio() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [openItems, setOpenItems] = useState<string[]>([])
+
+  const toggleItem = (id: string) => {
+    setOpenItems(prev => 
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    )
+  }
 
   useEffect(() => {
     setMounted(true)
@@ -131,111 +136,7 @@ export default function Portfolio() {
       </section>
 
       {/* Timeline Section */}
-    <section id="timeline" className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12 text-center">Education & Work Experience</h2>
-        <div className="relative">
-          {/* Center line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-200 dark:bg-gray-700"></div>
-          
-          {/* Timeline items */}
-          <div className="space-y-12">
-            {/* Education item 1*/}
-            <div className="flex justify-between items-center w-full">
-              <div className="order-1 w-5/12 text-right pr-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Honours Bachelor of Computer Science (Mobile Computing)
-                </h3>
-                <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-                  Sheridan College
-                </p>
-                <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                  2019 - 2023
-                </time>
-              </div>
-              <div className="z-10 flex items-center order-1 shadow-xl w-8 h-8 rounded-full bg-black dark:bg-white">
-                <div className="mx-auto font-semibold text-lg text-white dark:text-black">
-                  E
-                </div>
-              </div>
-              <div className="order-1 w-5/12"></div>
-            </div>
-
-            {/* Experience item 1 */}
-            <div className="flex justify-between items-center w-full right-timeline">
-              <div className="order-1 w-5/12"></div>
-              <div className="z-10 flex items-center order-1 bg-black dark:bg-white shadow-xl w-8 h-8 rounded-full">
-                <div className="mx-auto font-semibold text-lg text-white dark:text-black">W</div>
-              </div>
-              <div className="order-1 w-5/12 pl-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Software Developer
-                </h3>
-                <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-                  Sheridan College, Centre for Applied AI<br></br>Industry Partner: SOTI
-                </p>
-                <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                  May 2023 - December 2023 (8 months)
-                </time>
-              </div>
-            </div>
-
-            {/* Experience item 2 */}
-            <div className="flex justify-between items-center w-full right-timeline">
-              <div className="order-1 w-5/12"></div>
-              <div className="z-10 flex items-center order-1 bg-black dark:bg-white shadow-xl w-8 h-8 rounded-full">
-                <div className="mx-auto font-semibold text-lg text-white dark:text-black">W</div>
-              </div>
-              <div className="order-1 w-5/12 pl-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Machine Learning Data Analyst
-                </h3>
-                <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-                Sheridan College, Centre for Applied AI<br></br>Industry Partners: Naryant & The Town Of Oakville
-                </p>
-                <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                  May 2022 - December 2022 (8 months)
-                </time>
-              </div>
-            </div>
-            {/* Education item 2*/}
-            <div className="flex justify-between items-center w-full">
-              <div className="order-1 w-5/12 text-right pr-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Harvard edX Verified Certificate for CS50's Introduction to AI with Python
-                </h3>
-                <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                  Aug 2021
-                </time>
-              </div>
-              <div className="z-10 flex items-center order-1 shadow-xl w-8 h-8 rounded-full bg-black dark:bg-white">
-                <div className="mx-auto font-semibold text-lg text-white dark:text-black">
-                  E
-                </div>
-              </div>
-              <div className="order-1 w-5/12"></div>
-            </div>
-            {/* Education item 3*/}
-            <div className="flex justify-between items-center w-full">
-              <div className="order-1 w-5/12 text-right pr-8">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  Microsoft Technology Associate: Software Development Fundamentals Certification
-                </h3>
-                <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                  Aug 2021
-                </time>
-              </div>
-              <div className="z-10 flex items-center order-1 shadow-xl w-8 h-8 rounded-full bg-black dark:bg-white">
-                <div className="mx-auto font-semibold text-lg text-white dark:text-black">
-                  E
-                </div>
-              </div>
-              <div className="order-1 w-5/12"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      <Timeline></Timeline>
 
       {/* Skills Section */}
       <section id="skills" className="py-20">
