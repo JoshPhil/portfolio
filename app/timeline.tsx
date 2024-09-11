@@ -123,7 +123,7 @@ const TimelineCard: React.FC<{ item: TimelineItem }> = ({ item }) => {
 
 const Timeline: React.FC = () => {
     return (
-      <section id="timeline" className="py-20 bg-zinc-100 dark:bg-zinc-950">
+      <section id="education-work-experience" className="py-20 bg-zinc-100 dark:bg-zinc-950">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Education & Work Experience</h2>
           <div className="relative">
