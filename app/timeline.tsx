@@ -51,7 +51,7 @@ const timelineData: TimelineItem[] = [
   {
     type: 'education',
     title: 'Harvard edX Verified Certificate for CS50\'s Introduction to AI with Python',
-    organization: 'Harvard University (online)',
+    organization: 'HarvardX',
     date: 'Aug 2021',
     description: [
         'Gained exposure to graph search algorithms, classification, optimization, reinforcement learning, and other AI/ML topics through hands-on projects.'

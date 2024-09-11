@@ -11,6 +11,7 @@ import { useTheme } from "next-themes"
 import { Menu, Moon, Sun } from 'lucide-react'
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Timeline from './timeline'
+import Skills from './skills'
 
 
 
@@ -139,77 +140,7 @@ export default function Portfolio() {
       <Timeline></Timeline>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <BarChart2 className="mr-2" />
-                  Data Analytics
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc list-inside">
-                  <li>Python</li>
-                  <li>SQL</li>
-                  <li>Tableau</li>
-                  <li>Machine Learning</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Code className="mr-2" />
-                  Software Development
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc list-inside">
-                  <li>JavaScript</li>
-                  <li>React</li>
-                  <li>Node.js</li>
-                  <li>TypeScript</li>
-                  <li>Git</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Smartphone className="mr-2" />
-                  Mobile Development
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc list-inside">
-                  <li>React Native</li>
-                  <li>Swift</li>
-                  <li>Kotlin</li>
-                  <li>Flutter</li>
-                </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Database className="mr-2" />
-                  Databases
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc list-inside">
-                  <li>PostgreSQL</li>
-                  <li>MongoDB</li>
-                  <li>MySQL</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      <Skills></Skills>
 
       {/* Projects Section */}
       <section id="projects" className="py-20">
