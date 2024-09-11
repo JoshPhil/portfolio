@@ -33,7 +33,7 @@ const skills: Skill[] = [
 
 const SkillCard: React.FC<{ skill: Skill }> = ({ skill }) => {
   return (
-    <div className="bg-white dark:bg-zinc-800 rounded-xl shadow-lg p-4 flex flex-col items-center justify-center transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-zinc-700 w-32 h-32">
+    <div className="bg-white dark:bg-zinc-800 rounded-xl shadow-md p-4 flex flex-col items-center justify-center transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-zinc-700 w-32 h-32">
       <div className="relative w-16 h-16 mb-4">
         <Image
           src={skill.logo}
@@ -71,7 +71,7 @@ const SkillRow: React.FC<{ skills: Skill[] }> = ({ skills }) => {
   }, [controls, inView, skills.length])
 
   return (
-    <div ref={ref} className="overflow-hidden">
+    <div ref={ref} className="overflow-hidden pb-2">
       <motion.div className="flex space-x-6" animate={controls}>
         {[...skills, ...skills].map((skill, index) => (
           <SkillCard key={`${skill.name}-${index}`} skill={skill} />
@@ -86,7 +86,7 @@ const Skills: React.FC = () => {
   const bottomRowSkills = skills.slice(Math.ceil(skills.length / 2))
 
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-20 bg-zinc-100 dark:bg-zinc-950">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Skills & Technologies</h2>
         <div className="space-y-8">
