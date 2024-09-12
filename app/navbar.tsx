@@ -78,18 +78,6 @@ export default function Navbar() {
                       </li>
                       <li>
                         <a 
-                          href="#education-work-experience" 
-                          className="block px-4 py-2 text-lg hover:bg-accent rounded-md"
-                          onClick={() => {
-                            setActiveSection('timeline');
-                            setIsMenuOpen(false);
-                          }}
-                        >
-                          Education & Experience
-                        </a>
-                      </li>
-                      <li>
-                        <a 
                           href="#skills" 
                           className="block px-4 py-2 text-lg hover:bg-accent rounded-md"
                           onClick={() => {
@@ -98,6 +86,18 @@ export default function Navbar() {
                           }}
                         >
                           Skills
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          href="#education-work-experience" 
+                          className="block px-4 py-2 text-lg hover:bg-accent rounded-md"
+                          onClick={() => {
+                            setActiveSection('timeline');
+                            setIsMenuOpen(false);
+                          }}
+                        >
+                          Education & Experience
                         </a>
                       </li>
                       <li>
@@ -149,7 +149,7 @@ export default function Navbar() {
             transition={{ duration: 0.5, type: "spring", stiffness: 50 }}
           >
             <ul className="relative flex space-x-8">
-              {['Home', 'Education & Work Experience', 'Skills', 'Projects', 'Contact'].map((section) => (
+              {['Home', 'Skills', 'Education & Work Experience', 'Projects', 'Contact'].map((section) => (
                 <li key={section} className="relative">
                   <Link
                     href={`#${section.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
