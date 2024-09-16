@@ -29,6 +29,10 @@ const skills: Skill[] = [
   { name: 'NextJS', logo: '/logos/nextjs.svg', category: 'Software Development' },
   { name: 'Tailwind CSS', logo: '/logos/tailwindcss.svg', category: 'Software Development' },
   { name: 'Figma', logo: '/logos/figma.svg', category: 'Software Development' },
+  { name: 'SFML', logo: '/logos/sfml.svg', category: 'Software Development' },
+  { name: 'Firebase', logo: '/logos/firebase.svg', category: 'Software Development' },
+  { name: 'Xcode', logo: '/logos/xcode.svg', category: 'Software Development' },
+  { name: 'VSCode', logo: '/logos/vscode.svg', category: 'Software Development' },
 ]
 
 const SkillCard: React.FC<{ skill: Skill }> = ({ skill }) => {
