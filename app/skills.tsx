@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion, useAnimation, useInView } from 'framer-motion'
 
@@ -28,78 +28,146 @@ const skills: Skill[] = [
   { name: 'MySQL', logo: '/logos/mysql.svg', category: 'Databases' },
   { name: 'NextJS', logo: '/logos/nextjs.svg', category: 'Software Development' },
   { name: 'Tailwind CSS', logo: '/logos/tailwindcss.svg', category: 'Software Development' },
+  { name: 'Framer Motion', logo: '/logos/framermotion.svg', category: 'Software Development' },
   { name: 'Figma', logo: '/logos/figma.svg', category: 'Software Development' },
   { name: 'SFML', logo: '/logos/sfml.svg', category: 'Software Development' },
   { name: 'Firebase', logo: '/logos/firebase.svg', category: 'Software Development' },
   { name: 'Xcode', logo: '/logos/xcode.svg', category: 'Software Development' },
   { name: 'VSCode', logo: '/logos/vscode.svg', category: 'Software Development' },
+  { name: 'Jira', logo: '/logos/jira.svg', category: 'Software Development' },
 ]
 
 const SkillCard: React.FC<{ skill: Skill }> = ({ skill }) => {
   return (
-    <div className="bg-white dark:bg-zinc-800 rounded-xl shadow-md p-4 flex flex-col items-center justify-center transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-zinc-700 w-32 h-32">
-      <div className="relative w-16 h-16 mb-4">
+    <motion.div 
+      className="bg-white dark:bg-zinc-800 rounded-xl shadow-md p-4 flex flex-col items-center justify-center transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-zinc-700"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <div className="relative w-12 h-12 mb-3">
         <Image
           src={skill.logo}
           alt={`${skill.name} logo`}
           fill={true}
-          sizes="(max-width: 64px) 100vw, 64px"
+          sizes="(max-width: 48px) 100vw, 48px"
+          className="object-contain"
         />
       </div>
       <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">{skill.name}</span>
-    </div>
-  )
-}
-
-const SkillRow: React.FC<{ skills: Skill[] }> = ({ skills }) => {
-  const controls = useAnimation()
-  const ref = useRef(null)
-  const inView = useInView(ref)
-
-  useEffect(() => {
-    if (inView) {
-      controls.start({
-        x: [0, -(skills.length * 144)],
-        transition: {
-          x: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: skills.length * 10,
-            ease: "linear",
-          },
-        },
-      })
-    } else {
-      controls.stop()
-    }
-  }, [controls, inView, skills.length])
-
-  return (
-    <div ref={ref} className="overflow-hidden pb-2">
-      <motion.div className="flex space-x-6" animate={controls}>
-        {[...skills, ...skills].map((skill, index) => (
-          <SkillCard key={`${skill.name}-${index}`} skill={skill} />
-        ))}
-      </motion.div>
-    </div>
+    </motion.div>
   )
 }
 
 const Skills: React.FC = () => {
-  const topRowSkills = skills.slice(0, Math.ceil(skills.length / 2))
-  const bottomRowSkills = skills.slice(Math.ceil(skills.length / 2))
+  const [visibleSkills, setVisibleSkills] = useState(8)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [isMobileView, setIsMobileView] = useState(false)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const controls = useAnimation()
+
+  // Detect screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1024) {
+        setIsMobileView(true)
+      } else {
+        setIsMobileView(false)
+        setVisibleSkills(skills.length)
+        setIsExpanded(true) 
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize()
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible")
+    }
+  }, [controls, isInView])
+
+  const handleShowMore = () => {
+    const newVisible = visibleSkills + 8
+    if (newVisible >= skills.length) {
+      setIsExpanded(true)
+    }
+    setVisibleSkills(newVisible)
+  }
+
+  const handleCollapse = () => {
+    setVisibleSkills(8)
+    setIsExpanded(false)
+  }
 
   return (
     <section id="skills" className="py-20 bg-zinc-100 dark:bg-zinc-950">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Skills & Technologies</h2>
-        <div className="space-y-8">
-          <SkillRow skills={topRowSkills} />
-          <SkillRow skills={bottomRowSkills} />
-        </div>
+        <motion.div 
+          ref={ref}
+          initial="hidden"
+          animate={controls}
+          variants={{
+            hidden: { opacity: 0, y: 50 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.5,
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4"
+        >
+          {skills.slice(0, visibleSkills).map((skill, index) => (
+            <motion.div
+              key={`${skill.name}-${index}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <SkillCard skill={skill} />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Show the buttons only if in mobile view */}
+        {isMobileView && (
+  <div className="relative mt-8">
+    <div className="relative flex justify-center">
+      {isExpanded ? (
+        <motion.button
+          onClick={handleCollapse}
+          className="px-4 py-2 border border-gray-500 dark:border-gray-300 text-gray-500 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Collapse
+        </motion.button>
+      ) : (
+        <motion.button
+          onClick={handleShowMore}
+          className="px-4 py-2 border border-gray-500 dark:border-gray-300 text-gray-500 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Show More
+        </motion.button>
+      )}
+    </div>
+  </div>
+)}
+
       </div>
     </section>
   )
 }
+
+
 
 export default Skills

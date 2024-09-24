@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion"
 import { X } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const Projects: React.FC = () => {
   const [activeImages, setActiveImages] = useState<{ [key: number]: string | null }>({})
@@ -17,28 +16,93 @@ const Projects: React.FC = () => {
   const projects = [
     {
       title: "Portfolio Website",
-      description: "A personal portfolio website showcasing my skills, projects, and experience. Built using Next.js, Tailwind CSS, and TypeScript.",
+      description: "A personal portfolio website showcasing my skills, projects, and experience. Built using Next.js, Tailwind CSS, Framer Motion, and TypeScript.",
       technologies: ["react", "nextjs", "tailwindcss", "framermotion", "typescript", "vscode"],
       content: [
         {
           title: "Overview",
           description: "This portfolio website serves as a comprehensive showcase of my skills, projects, and professional experience. Leveraging the power of Next.js, I've created a fast, server-side rendered application that provides an optimal user experience.",
-          content: <Image src="/portfolioImage.png" alt="Portfolio Overview" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+          content: <Image src="" alt="Portfolio Overview" width={0} height={0} sizes="100vw" className="w-full h-auto" />
         },
         {
           title: "Design",
           description: "The site's responsive design, implemented with Tailwind CSS, ensures a seamless viewing experience across all devices. The clean and modern interface highlights my work and skills effectively.",
-          content: <Image src="/skillsImage.png" alt="Portfolio Design" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+          content: <Image src="" alt="Portfolio Design" width={0} height={0} sizes="100vw" className="w-full h-auto" />
         },
         {
           title: "Development",
           description: "TypeScript adds an extra layer of type safety, making the codebase more robust and maintainable. The integration of Framer Motion brings life to the UI with smooth, engaging animations that enhance the overall user interaction.",
-          content: <Image src="/projectsImage.png" alt="Portfolio Development" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+          content: <Image src="" alt="Portfolio Development" width={0} height={0} sizes="100vw" className="w-full h-auto" />
         }
       ]
     },
-    // ... (other projects remain unchanged)
-  ]
+    {
+      title: "Real Estate App",
+      description: "An app for browsing and listing properties, featuring real-time chat functionality and AI-powered image moderation to ensure appropriate property images.",
+      technologies: ["swift", "firebase", "xcode"],
+      content: [
+        {
+          title: "Overview",
+          description: "This innovative real estate application revolutionizes the way users browse and list properties. Built with Swift for iOS, it offers a native, high-performance experience.",
+          content: <Image src="" alt="Real Estate App Overview" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        },
+        {
+          title: "Real-time Chat",
+          description: "The app integrates Firebase for real-time data synchronization and user authentication, enabling features like instant messaging between buyers and sellers.",
+          content: <Image src="" alt="Real Estate App Chat" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        },
+        {
+          title: "AI-powered Image Moderation",
+          description: "A standout feature is the AI-powered image moderation system, which automatically screens property images to ensure they meet platform guidelines, enhancing user trust and platform integrity.",
+          content: <Image src="" alt="AI Image Moderation" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        }
+      ]
+    },
+    {
+      title: "Recipe App",
+      description: "A mobile app that helps users find and save recipes, with swift for iOS development and Firebase for data storage.",
+      technologies: ["swift", "firebase", "xcode"],
+      content: [
+        {
+          title: "Overview",
+          description: "This recipe application is designed to be the ultimate culinary companion for iOS users. Developed in Swift, it offers a smooth, native iOS experience.",
+          content: <Image src="" alt="Recipe App Overview" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        },
+        {
+          title: "Smart Search",
+          description: "Key features include a smart search function that can filter recipes based on dietary restrictions, available ingredients, or cooking time.",
+          content: <Image src="" alt="Smart Search Feature" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        },
+        {
+          title: "Meal Planning",
+          description: "A meal planning feature helps users organize their weekly meals and automatically generates shopping lists.",
+          content: <Image src="" alt="Meal Planning Feature" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        }
+      ]
+    },
+    {
+      title: "Pacman Clone",
+      description: "A recreation of the classic Pacman game built using C++ and the SFML library.",
+      technologies: ["c++", "sfml", "xcode"],
+      content: [
+        {
+          title: "Overview",
+          description: "This Pacman clone is a faithful recreation of the beloved classic arcade game, built from the ground up using C++ and the SFML library.",
+          content: <Image src="" alt="Pacman Clone Overview" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        },
+        {
+          title: "Game Logic",
+          description: "The core game logic has been meticulously implemented to match the original gameplay experience, including power pellets, fruit bonuses, and the iconic ghost behaviors.",
+          content: <Image src="" alt="Game Logic" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        },
+        {
+          title: "Ghost Pathfinding",
+          description: "A standout feature is the use of a Breadth-First Search (BFS) algorithm for ghost pathfinding, creating more intelligent and challenging ghost movements.",
+          content: <Image src="" alt="Ghost Pathfinding" width={0} height={0} sizes="100vw" className="w-full h-auto" />
+        }
+      ]
+    }
+  ];
 
   useEffect(() => {
     if (expandedProject !== null && scrollContainerRef.current) {
@@ -63,9 +127,9 @@ const Projects: React.FC = () => {
   }, [expandedProject, projects])
 
   const backgroundColors = [
-    "#0f172a", // resolved value of slate-900
-    "#000000", // black
-    "#171717", // neutral-900
+    "#0f172a",
+    "#000000",
+    "#171717",
   ]
   
   const linearGradients = [
@@ -127,12 +191,10 @@ const Projects: React.FC = () => {
   const overlayVariants = {
     hidden: { 
       opacity: 0,
-      backdropFilter: "blur(0px)",
       backgroundColor: "rgba(0, 0, 0, 0)"
     },
     visible: { 
       opacity: 1,
-      backdropFilter: "blur(5px)",
       backgroundColor: "rgba(0, 0, 0, 0.5)",
       transition: { 
         duration: 0.3,
@@ -147,8 +209,6 @@ const Projects: React.FC = () => {
       opacity: 0,
       transition: { 
         type: "spring",
-        stiffness: 300,
-        damping: 30
       }
     },
     visible: { 
@@ -156,8 +216,6 @@ const Projects: React.FC = () => {
       opacity: 1,
       transition: { 
         type: "spring",
-        stiffness: 300,
-        damping: 30
       }
     }
   }
@@ -185,8 +243,8 @@ const Projects: React.FC = () => {
                         <Image
                           src={`/logos/${tech}.svg`}
                           alt={`${tech} logo`}
-                          width={32}
-                          height={32}
+                          width={0}
+                          height={0}
                           className="object-contain w-auto h-auto"
                         />
                       </motion.div>
@@ -227,7 +285,7 @@ const Projects: React.FC = () => {
                 className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
               >
                 <div className="w-1/2 pr-5">
-                  <div className="sticky top-0 pt-20 pb-10">
+                  <div className="sticky top-0 pt-20 pb-12">
                     {projects[expandedProject].content.map((item, index) => (
                       <motion.div 
                         key={item.title + index} 
