@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState, useMemo } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
