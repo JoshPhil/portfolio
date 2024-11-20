@@ -19,9 +19,8 @@ export default function Portfolio() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-  const { theme, setTheme } = useTheme()
+  const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const prevTheme = useRef(theme)
 
@@ -31,7 +30,6 @@ export default function Portfolio() {
 
   useEffect(() => {
     prevTheme.current = theme
-    setIsMenuOpen(false);
   }, [theme])
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,9 +42,7 @@ export default function Portfolio() {
     setMessage('')
   }
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+
 
   if (!mounted) return null
 

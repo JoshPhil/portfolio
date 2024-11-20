@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
@@ -190,25 +190,31 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     if (expandedProject !== null && scrollContainerRef.current) {
+      const scrollContainer = scrollContainerRef.current;
+  
       const handleScroll = () => {
-        if (scrollContainerRef.current) {
-          const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current
-          const scrollProgress = scrollTop / (scrollHeight - clientHeight)
-          const content = projects[expandedProject].content
-          const cardLength = content.length
-          const newActiveCard = Math.min(Math.floor(scrollProgress * cardLength), cardLength - 1)
-          setActiveCard(newActiveCard)
+        if (scrollContainer) {
+          const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+          const scrollProgress = scrollTop / (scrollHeight - clientHeight);
+          const content = projects[expandedProject].content;
+          const cardLength = content.length;
+          const newActiveCard = Math.min(
+            Math.floor(scrollProgress * cardLength),
+            cardLength - 1
+          );
+          setActiveCard(newActiveCard);
         }
-      }
-
-      scrollContainerRef.current.addEventListener('scroll', handleScroll)
+      };
+  
+      scrollContainer.addEventListener('scroll', handleScroll);
+  
       return () => {
-        if (scrollContainerRef.current) {
-          scrollContainerRef.current.removeEventListener('scroll', handleScroll)
-        }
-      }
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      };
     }
-  }, [expandedProject, projects])
+  }, [expandedProject]);
+  
+
 
   const backgroundColors = [
     "#0f172a",
@@ -216,26 +222,30 @@ const Projects: React.FC = () => {
     "#171717",
   ]
   
-  const linearGradients = [
-    "linear-gradient(to bottom right, #06b6d4, #10b981)",
-    "linear-gradient(to bottom right, #ec4899, #6366f1)",
-    "linear-gradient(to bottom right, #f97316, #f59e0b)",
-  ]
+  const linearGradients = useMemo(
+    () => [
+      "linear-gradient(to bottom right, #06b6d4, #10b981)",
+      "linear-gradient(to bottom right, #ec4899, #6366f1)",
+      "linear-gradient(to bottom right, #f97316, #f59e0b)",
+    ],
+    []
+  );
+  
 
-  const [backgroundGradient, setBackgroundGradient] = useState(linearGradients[0])
+
 
   useEffect(() => {
     if (expandedProject !== null) {
-      setBackgroundGradient(linearGradients[activeCard % linearGradients.length])
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = 'unset';
     }
-
+  
     return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [activeCard, expandedProject, linearGradients])
+      document.body.style.overflow = 'unset';
+    };
+  }, [expandedProject]); // Remove `linearGradients` if unnecessary
+  
 
   const handleExpandProject = (projectIndex: number) => {
     setExpandedProject(projectIndex)
