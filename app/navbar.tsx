@@ -160,13 +160,9 @@ export default function Navbar() {
                   </Link>
                   {activeSection === section && (
                     <motion.span
-                    className="absolute inset-0 bg-gray-100 rounded-full -z-10 dark:bg-gray-800"
+                    className="absolute -left-3 -right-3 top-0 bottom-0 bg-zinc-100 rounded-full -z-10 dark:bg-zinc-800" // Adjusted inset
                     layoutId="activeSection"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    style={{
-                      left: '-10px',
-                      right: '-10px',
-                    }}
                   ></motion.span>
                   )}
                 </li>
