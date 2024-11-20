@@ -215,24 +215,11 @@ const Projects: React.FC = () => {
   }, [expandedProject]);
   
 
-
   const backgroundColors = [
     "#0f172a",
     "#000000",
     "#171717",
   ]
-  
-  const linearGradients = useMemo(
-    () => [
-      "linear-gradient(to bottom right, #06b6d4, #10b981)",
-      "linear-gradient(to bottom right, #ec4899, #6366f1)",
-      "linear-gradient(to bottom right, #f97316, #f59e0b)",
-    ],
-    []
-  );
-  
-
-
 
   useEffect(() => {
     if (expandedProject !== null) {
