@@ -287,7 +287,7 @@ const Projects: React.FC = () => {
   }
 
   return (
-    <section id="projects" className="py-20 bg-zinc-100 dark:bg-zinc-950 relative">
+    <section id="projects" className="py-20 bg-white dark:bg-zinc-950 relative">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white">Projects</h2>
         <div className="relative">

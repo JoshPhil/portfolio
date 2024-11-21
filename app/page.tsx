@@ -61,22 +61,31 @@ export default function Portfolio() {
         >
       
           {/* Hero Section */}
-          <section id="home" className="relative flex items-center justify-center mx-auto py-32 bg-zinc-100 dark:bg-zinc-950 min-h-screen">
-            <div className="container mx-auto px-4">
+          <section
+            id="home"
+            className="relative flex items-center justify-center mx-auto py-32 min-h-screen overflow-hidden"
+          >
+            {/* Gradient background */}
+            <div
+              className="absolute inset-0 bg-gradient-to-b 
+                from-pink-500/20 via-purple-500/10 to-white
+                dark:from-pink-500/10 dark:via-purple-500/5 dark:to-zinc-950 mask-gradient"
+            />
+
+            <div className="container mx-auto px-4 relative z-10">
               <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
                 {/* Left content */}
-                <motion.div 
+                <motion.div
                   className="flex-1 text-left"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <GradualSpacing 
+                  <GradualSpacing
                     className="text-4xl md:text-7xl font-bold mb-6"
                     text="Hi, I'm Joshua Philip"
                   />
-
-                  <motion.p 
+                  <motion.p
                     className="text-xl mb-8 text-muted-foreground"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -84,7 +93,7 @@ export default function Portfolio() {
                   >
                     Data Analytics Specialist, Software Developer & Mobile App Expert
                   </motion.p>
-                  <motion.div 
+                  <motion.div
                     className="flex gap-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -97,7 +106,7 @@ export default function Portfolio() {
                       Download CV
                     </Button>
                   </motion.div>
-                  <motion.div 
+                  <motion.div
                     className="flex gap-4 mt-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -119,17 +128,18 @@ export default function Portfolio() {
                 </motion.div>
 
                 {/* Right content */}
-                <motion.div 
+                <motion.div
                   className="flex-1 relative"
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
                   <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] mx-auto">
-                    {/* Glow effect */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500/30 to-purple-500/30 blur-3xl" />
                     {/* Image container */}
-                    <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-zinc-100/10 dark:border-zinc-900/10">
+                    <div
+                      className="relative w-full h-full rounded-full overflow-hidden 
+                      bg-white dark:bg-zinc-900"
+                    >
                       <Image
                         src="/portrait.png?height=400&width=400"
                         alt="Joshua Philip"
@@ -143,6 +153,7 @@ export default function Portfolio() {
               </div>
             </div>
           </section>
+
 
           {/* Skills Section */}
           <Skills />

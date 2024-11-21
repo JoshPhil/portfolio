@@ -67,3 +67,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.mask-gradient {
+  mask-image: radial-gradient(ellipse 70% 35% at center, transparent 70%, white 100%);
+  mask-composite: exclude;
+  -webkit-mask-image: radial-gradient(ellipse 70% 35% at center, transparent 70%, white 100%);
+  -webkit-mask-composite: exclude;
+}
+

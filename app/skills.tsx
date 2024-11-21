@@ -104,7 +104,7 @@ const Skills: React.FC = () => {
   }
 
   return (
-    <section id="skills" className="py-20 bg-zinc-100 dark:bg-zinc-950">
+    <section id="skills" className="py-20 bg-white dark:bg-zinc-950">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Skills & Technologies</h2>
         <motion.div 
