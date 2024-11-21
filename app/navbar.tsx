@@ -78,14 +78,14 @@ export default function Navbar() {
                       </li>
                       <li>
                         <a 
-                          href="#skills" 
+                          href="#technologies" 
                           className="block px-4 py-2 text-lg hover:bg-accent rounded-md"
                           onClick={() => {
-                            setActiveSection('Skills');
+                            setActiveSection('Technologies');
                             setIsMenuOpen(false);
                           }}
                         >
-                          Skills
+                          Technologies
                         </a>
                       </li>
                       <li>
@@ -110,18 +110,6 @@ export default function Navbar() {
                           }}
                         >
                           Projects
-                        </a>
-                      </li>
-                      <li>
-                        <a 
-                          href="#contact" 
-                          className="block px-4 py-2 text-lg hover:bg-accent rounded-md"
-                          onClick={() => {
-                            setActiveSection('Contact');
-                            setIsMenuOpen(false);
-                          }}
-                        >
-                          Contact
                         </a>
                       </li>
                     </ul>
@@ -149,7 +137,7 @@ export default function Navbar() {
             transition={{ duration: 0.5, type: "spring", stiffness: 50 }}
           >
             <ul className="relative flex space-x-8">
-              {['Home', 'Skills', 'Education & Work Experience', 'Projects', 'Contact'].map((section) => (
+              {['Home', 'Technologies', 'Education & Work Experience', 'Projects'].map((section) => (
                 <li key={section} className="relative">
                   <Link
                     href={`#${section.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}

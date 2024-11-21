@@ -2,10 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Github, Linkedin, Mail, Send } from 'lucide-react'
+import { Github, Linkedin, Mail, Download } from 'lucide-react'
 import GradualSpacing from "@/components/magicui/gradual-spacing";
 import { useTheme } from "next-themes"
 import Timeline from './timeline'
@@ -17,9 +14,6 @@ import Image from 'next/image'
 
 
 export default function Portfolio() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
@@ -33,14 +27,23 @@ export default function Portfolio() {
     prevTheme.current = theme
   }, [theme])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically send the form data to a server
-    console.log('Form submitted:', { name, email, message })
-    // Reset form fields
-    setName('')
-    setEmail('')
-    setMessage('')
+  function CopyEmailButton() {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyEmail = () => {
+      navigator.clipboard.writeText('joshphilip2001@gmail.com').then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000); // Reset the "copied" state after 2 seconds
+      });
+    };
+
+    return (
+      <Button variant="ghost" size="icon" onClick={handleCopyEmail}>
+        <Mail className="h-5 w-5" />
+        <span className="sr-only">Email</span>
+        {copied && <span className="ml-2 text-green-500">Copied!</span>}
+      </Button>
+    );
   }
 
   if (!mounted) return null
@@ -63,7 +66,7 @@ export default function Portfolio() {
           {/* Hero Section */}
           <section
             id="home"
-            className="relative flex items-center justify-center mx-auto py-32 min-h-screen overflow-hidden"
+            className="relative flex items-center justify-center mx-auto py-16 md:py-32 min-h-screen overflow-hidden"
           >
             {/* Gradient background */}
             <div
@@ -73,20 +76,20 @@ export default function Portfolio() {
             />
 
             <div className="container mx-auto px-4 relative z-10">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
                 {/* Left content */}
                 <motion.div
-                  className="flex-1 text-left"
+                  className="flex-1 text-center lg:text-left"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
                   <GradualSpacing
-                    className="text-4xl md:text-7xl font-bold mb-6"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 lg:mb-6"
                     text="Hi, I'm Joshua Philip"
                   />
                   <motion.p
-                    className="text-xl mb-8 text-muted-foreground"
+                    className="text-lg sm:text-xl mb-6 lg:mb-8 text-muted-foreground"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
@@ -94,56 +97,66 @@ export default function Portfolio() {
                     Data Analytics Specialist, Software Developer & Mobile App Expert
                   </motion.p>
                   <motion.div
-                    className="flex gap-4"
+                    className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
                   >
-                    <Button variant="default" size="lg">
-                      Contact me
-                    </Button>
-                    <Button variant="outline" size="lg">
-                      Download CV
-                    </Button>
+                    <a href="mailto:joshphilip2001@gmail.com?subject=Contact%20Request&body=Hello%20Joshua,%20I%20would%20like%20to%20get%20in%20touch." className="w-full sm:w-auto">
+                      <Button variant="default" size="lg" className="w-full sm:w-auto">
+                        Contact me
+                      </Button>
+                    </a>
+
+                    <a href="/Joshua_Resume.pdf" download="Joshua_Philip_CV.pdf" className="w-full sm:w-auto">
+                      <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                        <Download className="h-4 w-4 mr-2" />
+                        <span>Download CV</span>
+                      </Button>
+                    </a>
                   </motion.div>
                   <motion.div
-                    className="flex gap-4 mt-8"
+                    className="flex gap-4 mt-6 lg:mt-8 justify-center lg:justify-start"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                   >
-                    <Button variant="ghost" size="icon">
-                      <Github className="h-5 w-5" />
-                      <span className="sr-only">GitHub</span>
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                      <Linkedin className="h-5 w-5" />
-                      <span className="sr-only">LinkedIn</span>
-                    </Button>
-                    <Button variant="ghost" size="icon">
-                      <Mail className="h-5 w-5" />
-                      <span className="sr-only">Email</span>
-                    </Button>
+                    <a href="https://github.com/JoshPhil" target="_blank" rel="noopener noreferrer">
+                      <Button variant="ghost" size="icon">
+                        <Github className="h-5 w-5" />
+                        <span className="sr-only">GitHub</span>
+                      </Button>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/joshua-philip/" target="_blank" rel="noopener noreferrer">
+                      <Button variant="ghost" size="icon">
+                        <Linkedin className="h-5 w-5" />
+                        <span className="sr-only">LinkedIn</span>
+                      </Button>
+                    </a>
+
+                    <CopyEmailButton />
                   </motion.div>
                 </motion.div>
 
                 {/* Right content */}
                 <motion.div
-                  className="flex-1 relative"
+                  className="flex-1 relative mt-8 lg:mt-0"
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] mx-auto">
+                  <div className="relative w-[250px] h-[250px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px] mx-auto">
                     {/* Image container */}
                     <div
                       className="relative w-full h-full rounded-full overflow-hidden 
                       bg-white dark:bg-zinc-900"
                     >
                       <Image
-                        src="/portrait.png?height=400&width=400"
+                        src="/portrait.png"
                         alt="Joshua Philip"
-                        fill
+                        fill={true}
+                        sizes="(max-width: 768px) 250px, (max-width: 1024px) 350px, 400px"
                         className="object-cover"
                         priority
                       />
@@ -154,50 +167,15 @@ export default function Portfolio() {
             </div>
           </section>
 
-
-          {/* Skills Section */}
-          <Skills />
-
           {/* Timeline Section */}
           <Timeline />
+          
+          {/* Skills Section */}
+          <Skills />
 
           {/* Projects Section */}
           <Projects />
 
-          {/* Contact Section */}
-          <section id="contact" className="py-20 bg-zinc-100 dark:bg-zinc-950">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-bold mb-8 text-center">Get in Touch</h2>
-              <Card className="max-w-md mx-auto">
-                <CardHeader>
-                  <CardTitle>Contact Me</CardTitle>
-                  <CardDescription>Fill out the form below to send me a message</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit}>
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
-                        <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
-                        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                      </div>
-                      <div>
-                        <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
-                        <Textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} required />
-                      </div>
-                      <Button type="submit" className="w-full">
-                        Send Message
-                        <Send className="ml-2 h-4 w-4" />
-                      </Button>
-                    </div>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
         </motion.div>
       </AnimatePresence>
     </>

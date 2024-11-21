@@ -9,7 +9,7 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react"
 interface Project {
   title: string
   description: string
-  image: string
+  //image: string
   technologies: string[]
   content: {
     title: string
@@ -22,7 +22,7 @@ const projects: Project[] = [
   {
     title: "Portfolio Website",
     description: "A personal portfolio website showcasing my skills, projects, and experience. Built using Next.js, Tailwind CSS, Framer Motion, and TypeScript.",
-    image: "/placeholder.svg?height=400&width=600",
+    //image: "/placeholder.svg?height=400&width=600",
     technologies: ["react", "nextjs", "tailwindcss", "framermotion", "typescript", "vscode"],
     content: [
       {
@@ -45,7 +45,7 @@ const projects: Project[] = [
   {
     title: "Real Estate App",
     description: "An app for browsing and listing properties, featuring real-time chat and AI-powered image moderation to ensure appropriate property images.",
-    image: "/placeholder.svg?height=400&width=600",
+    //image: "/placeholder.svg?height=400&width=600",
     technologies: ["swift", "firebase", "xcode"],
     content: [
       {
@@ -68,7 +68,7 @@ const projects: Project[] = [
   {
     title: "Recipe App",
     description: "A mobile app that helps users find and save recipes, with swift for iOS development and Firebase for data storage.",
-    image: "/placeholder.svg?height=400&width=600",
+    //image: "/placeholder.svg?height=400&width=600",
     technologies: ["swift", "firebase", "xcode"],
     content: [
       {
@@ -91,7 +91,7 @@ const projects: Project[] = [
   {
     title: "Pacman Clone",
     description: "A recreation of the classic Pacman game built using C++ and the SFML library. It uses the BFS pathfinding algorithm for ghost movement.",
-    image: "/placeholder.svg?height=400&width=600",
+    //image: "/placeholder.svg?height=400&width=600",
     technologies: ["c++", "sfml", "xcode"],
     content: [
       {
@@ -142,6 +142,7 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
     >
+      {/*
       <Image 
         className="w-full" 
         src={project.image} 
@@ -149,13 +150,14 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
         width={600}
         height={400}
       />
+      */}
       <div className="px-5 py-4">
         <div className="font-bold text-xl mb-2 text-gray-900 dark:text-white">{project.title}</div>
         <p className="text-gray-700 dark:text-gray-300 text-base">
           {project.description}
         </p>
       </div>
-      <div className="px-6 pt-4 pb-2 flex flex-wrap gap-2">
+      <div className="px-6 pt-4 pb-4 flex flex-wrap gap-2">
         {project.technologies.map((tech, index) => (
           <motion.div 
             key={index} 
@@ -175,9 +177,11 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
           </motion.div>
         ))}
       </div>
+      {/*
       <div className="px-6 pb-4">
         <Button variant="outline" onClick={onClick}>More details</Button>
       </div>
+      */}
     </motion.div>
   )
 }
@@ -231,7 +235,7 @@ const Projects: React.FC = () => {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [expandedProject]); // Remove `linearGradients` if unnecessary
+  }, [expandedProject]);
   
 
   const handleExpandProject = (projectIndex: number) => {
@@ -289,7 +293,10 @@ const Projects: React.FC = () => {
   return (
     <section id="projects" className="py-20 bg-white dark:bg-zinc-950 relative">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-center text-gray-900 dark:text-white">Projects</h2>
+        <h2 className="text-3xl font-bold mb-2 text-center text-gray-900 dark:text-white">Projects</h2>
+        <p className="flex justify-center text-lg text-gray-700 dark:text-gray-300">
+          Projects showcasing web, mobile, and game development using Next.js, Swift, TypeScript, and C++.
+        </p>
         <div className="relative">
           <div className="overflow-hidden" ref={carouselRef}>
             <div className="flex space-x-4 pb-4 pt-4">

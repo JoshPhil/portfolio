@@ -14,27 +14,15 @@ const skills: Skill[] = [
   { name: 'Python', logo: './logos/python.svg', category: 'Data Analytics' },
   { name: 'C++', logo: '/logos/c++.svg', category: 'Data Analytics' },
   { name: 'Java', logo: '/logos/java.svg', category: 'Data Analytics' },
-  { name: 'c#', logo: '/logos/cSharp.svg', category: 'Data Analytics' },
-  { name: 'JavaScript', logo: '/logos/javascript.svg', category: 'Software Development' },
   { name: 'Node.js', logo: '/logos/node-js.svg', category: 'Software Development' },
   { name: 'TypeScript', logo: '/logos/typescript.svg', category: 'Software Development' },
-  { name: 'Git', logo: '/logos/git.svg', category: 'Software Development' },
-  { name: 'React Native', logo: '/logos/react.svg', category: 'Mobile Development' },
+  { name: 'React', logo: '/logos/react.svg', category: 'Mobile Development' },
   { name: 'Swift', logo: '/logos/swift.svg', category: 'Mobile Development' },
   { name: 'Kotlin', logo: '/logos/kotlin.svg', category: 'Mobile Development' },
   { name: 'Flutter', logo: '/logos/flutter.svg', category: 'Mobile Development' },
-  { name: 'PostgreSQL', logo: '/logos/postgresql.svg', category: 'Databases' },
-  { name: 'MongoDB', logo: '/logos/mongodb.svg', category: 'Databases' },
   { name: 'MySQL', logo: '/logos/mysql.svg', category: 'Databases' },
   { name: 'NextJS', logo: '/logos/nextjs.svg', category: 'Software Development' },
   { name: 'Tailwind CSS', logo: '/logos/tailwindcss.svg', category: 'Software Development' },
-  { name: 'Framer Motion', logo: '/logos/framermotion.svg', category: 'Software Development' },
-  { name: 'Figma', logo: '/logos/figma.svg', category: 'Software Development' },
-  { name: 'SFML', logo: '/logos/sfml.svg', category: 'Software Development' },
-  { name: 'Firebase', logo: '/logos/firebase.svg', category: 'Software Development' },
-  { name: 'Xcode', logo: '/logos/xcode.svg', category: 'Software Development' },
-  { name: 'VSCode', logo: '/logos/vscode.svg', category: 'Software Development' },
-  { name: 'Jira', logo: '/logos/jira.svg', category: 'Software Development' },
 ]
 
 const SkillCard: React.FC<{ skill: Skill }> = ({ skill }) => {
@@ -104,9 +92,9 @@ const Skills: React.FC = () => {
   }
 
   return (
-    <section id="skills" className="py-20 bg-white dark:bg-zinc-950">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Skills & Technologies</h2>
+    <section id="technologies" className="py-20 bg-white dark:bg-zinc-950">
+      <div className="container mx-auto px-2 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Top Technologies Used</h2>
         <motion.div 
           ref={ref}
           initial="hidden"
@@ -122,7 +110,7 @@ const Skills: React.FC = () => {
               }
             }
           }}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-4 gap-4"
         >
           {skills.slice(0, visibleSkills).map((skill, index) => (
             <motion.div
@@ -162,7 +150,6 @@ const Skills: React.FC = () => {
     </div>
   </div>
 )}
-
       </div>
     </section>
   )
