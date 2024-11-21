@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface TimelineItem {
   type: 'education' | 'experience'
@@ -74,7 +75,7 @@ const TimelineCard: React.FC<{ item: TimelineItem }> = ({ item }) => {
   return (
     <motion.div
       layout
-      className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-6 w-full"
+      className="bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-6 w-full mb-4"
     >
       <motion.div layout className="flex justify-between items-start">
         <div>
@@ -122,33 +123,36 @@ const TimelineCard: React.FC<{ item: TimelineItem }> = ({ item }) => {
 }
 
 const Timeline: React.FC = () => {
-    return (
-      <section id="education-work-experience" className="py-20 bg-zinc-100 dark:bg-zinc-950">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Education & Work Experience</h2>
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-zinc-700 transform md:-translate-x-1/2"></div>
-            
-            {/* Timeline items */}
-            <div className="space-y-12">
-              {timelineData.map((item, index) => (
-                <div key={index} className="relative flex items-center">
-                  {/* Timeline dot */}
-                  <div className="absolute left-6 md:left-1/2 top-1/2 w-4 h-4 rounded-full bg-primary transform -translate-x-1/2 -translate-y-1/2"></div>
-                  
-                  {/* Card wrapper */}
-                  <div className={`pl-14 md:pl-0 md:w-5/12 ${item.type === 'education' ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
-                    <TimelineCard item={item} />
-                  </div>
-                </div>
+  const educationItems = timelineData.filter(item => item.type === 'education')
+  const experienceItems = timelineData.filter(item => item.type === 'experience')
+
+  return (
+    <section id="education-work-experience" className="py-20 bg-zinc-100 dark:bg-zinc-950">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Education & Work Experience</h2>
+        <Tabs defaultValue="education" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="education">Education</TabsTrigger>
+            <TabsTrigger value="experience">Experience</TabsTrigger>
+          </TabsList>
+          <TabsContent value="education">
+            <div className="space-y-4">
+              {educationItems.map((item, index) => (
+                <TimelineCard key={index} item={item} />
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-    )
+          </TabsContent>
+          <TabsContent value="experience">
+            <div className="space-y-4">
+              {experienceItems.map((item, index) => (
+                <TimelineCard key={index} item={item} />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </section>
+  )
 }
-  
 
 export default Timeline

@@ -13,6 +13,7 @@ import Skills from './skills'
 import Projects from './projects'
 import Navbar from './navbar'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 
 export default function Portfolio() {
@@ -42,8 +43,6 @@ export default function Portfolio() {
     setMessage('')
   }
 
-
-
   if (!mounted) return null
 
   return (
@@ -62,25 +61,86 @@ export default function Portfolio() {
         >
       
           {/* Hero Section */}
-          <section id="home" className="mx-auto py-32 bg-zinc-100 dark:bg-zinc-950 text-center h-screen flex flex-col justify-center items-center">
-            <GradualSpacing
-              className="font-display text-center text-4xl font-bold tracking-[-0.1em]  text-black dark:text-white md:text-7xl md:leading-[5rem]"
-              text="Joshua Philip"
-            />
-            <p className="text-xl mb-8">Data Analytics Specialist, Software Developer & Mobile App Expert</p>
-            <div className="flex justify-center space-x-4">
-              <Button variant="outline" size="icon">
-                <Github className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </Button>
-              <Button variant="outline" size="icon">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Button>
-              <Button variant="outline" size="icon">
-                <Mail className="h-5 w-5" />
-                <span className="sr-only">Email</span>
-              </Button>
+          <section id="home" className="relative flex items-center justify-center mx-auto py-32 bg-zinc-100 dark:bg-zinc-950 min-h-screen">
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+                {/* Left content */}
+                <motion.div 
+                  className="flex-1 text-left"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <GradualSpacing 
+                    className="text-4xl md:text-7xl font-bold mb-6"
+                    text="Hi, I'm Joshua Philip"
+                  />
+
+                  <motion.p 
+                    className="text-xl mb-8 text-muted-foreground"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    Data Analytics Specialist, Software Developer & Mobile App Expert
+                  </motion.p>
+                  <motion.div 
+                    className="flex gap-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                  >
+                    <Button variant="default" size="lg">
+                      Contact me
+                    </Button>
+                    <Button variant="outline" size="lg">
+                      Download CV
+                    </Button>
+                  </motion.div>
+                  <motion.div 
+                    className="flex gap-4 mt-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
+                    <Button variant="ghost" size="icon">
+                      <Github className="h-5 w-5" />
+                      <span className="sr-only">GitHub</span>
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <Linkedin className="h-5 w-5" />
+                      <span className="sr-only">LinkedIn</span>
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <Mail className="h-5 w-5" />
+                      <span className="sr-only">Email</span>
+                    </Button>
+                  </motion.div>
+                </motion.div>
+
+                {/* Right content */}
+                <motion.div 
+                  className="flex-1 relative"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] mx-auto">
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-500/30 to-purple-500/30 blur-3xl" />
+                    {/* Image container */}
+                    <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-zinc-100/10 dark:border-zinc-900/10">
+                      <Image
+                        src="/portrait.png?height=400&width=400"
+                        alt="Joshua Philip"
+                        fill
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </section>
 
