@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from 'next/image'
 
 interface TimelineItem {
   type: 'education' | 'experience'
@@ -12,6 +13,7 @@ interface TimelineItem {
   date: string
   description?: string[]
   tasks?: string[]
+  technologies: string[]
 }
 
 const timelineData: TimelineItem[] = [
@@ -23,7 +25,8 @@ const timelineData: TimelineItem[] = [
     description: [
         'Cumulative GPA: 3.51 / 4.00.' ,
         'Coursework: Programming Languages, Advanced Mobile Application Development, Data Structures and Algorithms Web Application Design and Implementation, Statistics for Data Science, Software Engineering, Artificial Intelligence, Quality Assurance and Software Testing, Simulation and Visualization, Business Intelligence and Data Mining'
-    ]
+    ],
+    technologies: []
   },
   {
     type: 'experience',
@@ -35,7 +38,8 @@ const timelineData: TimelineItem[] = [
       'Rewrote Python preprocessing code in Kotlin and Java for on-device execution',
       'Trained a TensorFlow Lite model on the CIC dataset to detect malicious connections, utilizing VirusTotal API for connection classification to enhance network security',
       'Incorporated on-device training with TensorFlow Lite, enhancing privacy and allowing for model customization'
-    ]
+    ],
+    technologies: ['java', 'kotlin', 'python', 'tensorflow', 'androidstudio']
   },
   {
     type: 'experience',
@@ -47,7 +51,8 @@ const timelineData: TimelineItem[] = [
       'Worked with Naryant & The Town Of Oakville on data-driven projects',
       'Utilized Pandas, NumPy, and GeoPandas to analyze large datasets, geocode bus stop names, map data points, and visualize origin-destination locations with geospatial coordinates',
       'Ensured code quality through QA testing, evaluating Python code against specified requirements'
-    ]
+    ],
+    technologies: ['python']
   },
   {
     type: 'education',
@@ -56,7 +61,8 @@ const timelineData: TimelineItem[] = [
     date: 'Aug 2021',
     description: [
         'Gained exposure to graph search algorithms, classification, optimization, reinforcement learning, and other AI/ML topics through hands-on projects.'
-    ]
+    ],
+    technologies: ['python', 'tensorflow']
   },
   {
     type: 'education',
@@ -65,12 +71,34 @@ const timelineData: TimelineItem[] = [
     date: 'Aug 2021',
     description: [
         'Proficient in computer storage, decision structures, error handling, and object-oriented principles like inheritance and polymorphism, along with ASP.NET, web services integration, and C#.'
-    ]
+    ],
+    technologies: ['cSharp']
   }
 ]
 
 const TimelineCard: React.FC<{ item: TimelineItem }> = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [activeImage, setActiveImage] = useState<string | null>(null)
+
+  const imageVariants = {
+    hover: {
+      scale: 1.2,
+      rotate: [0, 5, -5, 0],
+      transition: {
+        duration: 0.3,
+        rotate: {
+          repeat: Infinity,
+          repeatType: "reverse",
+          duration: 0.5
+        }
+      }
+    }
+  }
+
+  const handleImageClick = (tech: string) => {
+    setActiveImage(tech)
+    setTimeout(() => setActiveImage(null), 1500)
+  }
 
   return (
     <motion.div
@@ -84,6 +112,26 @@ const TimelineCard: React.FC<{ item: TimelineItem }> = ({ item }) => {
           <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">{item.date}</time>
         </div>
       </motion.div>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {item.technologies.map((tech, index) => (
+          <motion.div 
+            key={index} 
+            className="relative w-8 h-8 cursor-pointer"
+            whileHover="hover"
+            animate={activeImage === tech ? "hover" : ""}
+            variants={imageVariants}
+            onClick={() => handleImageClick(tech)}
+          >
+            <Image
+              src={`/logos/${tech}.svg`}
+              alt={`${tech} logo`}
+              width={32}
+              height={32}
+              className="object-contain w-auto h-auto"
+            />
+          </motion.div>
+        ))}
+      </div>
       <motion.div
         layout
         className="mt-4 cursor-pointer flex items-center text-primary"
