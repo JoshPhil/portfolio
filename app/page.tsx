@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Download } from 'lucide-react'
+import { Github, Linkedin, Mail, Download, MapPin } from 'lucide-react'
 import GradualSpacing from "@/components/magicui/gradual-spacing";
 import { useTheme } from "next-themes"
 import Timeline from './timeline'
@@ -89,13 +89,24 @@ export default function Portfolio() {
               text="Hi, I'm Joshua Philip"
             />
             <motion.p
-              className="text-lg sm:text-xl mb-6 lg:mb-8 text-muted-foreground"
+              className="text-lg sm:text-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               Data Analytics Specialist, Software Developer & Mobile App Expert
             </motion.p>
+
+            <motion.div
+              className="flex items-center justify-center lg:justify-start text-lg sm:text-xl mb-6 lg:mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <MapPin className="h-5 w-5 mr-2 inline-block" />
+              <span>Brampton, Ontario, Canada</span>
+            </motion.div>
+
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}

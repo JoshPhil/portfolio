@@ -170,8 +170,8 @@ const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ proj
             <Image
               src={`/logos/${tech}.svg`}
               alt={`${tech} logo`}
-              width={32}
-              height={32}
+              width={0}
+              height={0}
               className="object-contain w-auto h-auto"
             />
           </motion.div>
