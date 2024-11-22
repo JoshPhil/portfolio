@@ -153,7 +153,7 @@ export default function Portfolio() {
                 bg-white dark:bg-zinc-900"
               >
                 <Image
-                  src="/portrait.png"
+                  src="/portrait.webp"
                   alt="Joshua Philip"
                   fill={true}
                   sizes="(max-width: 640px) 250px, (max-width: 768px) 300px, (max-width: 1024px) 350px, 400px"

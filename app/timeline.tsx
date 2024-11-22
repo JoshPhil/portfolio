@@ -28,7 +28,7 @@ const timelineData: TimelineItem[] = [
   {
     type: 'experience',
     title: 'Software Developer',
-    organization: 'Sheridan College, Centre for Applied AI',
+    organization: 'SOTI Inc.',
     date: 'May 2023 - December 2023 (8 months)',
     tasks: [
       'Improved privacy of Android app by researching, and implementing a centralized federated learning system using Java, Kotlin (edge devices), and Python (server-side)',
@@ -40,7 +40,7 @@ const timelineData: TimelineItem[] = [
   {
     type: 'experience',
     title: 'Data Analyst',
-    organization: 'Sheridan College, Centre for Applied AI',
+    organization: 'Naryant',
     date: 'May 2022 - December 2022 (8 months)',
     tasks: [
       'Led the design of a 400-person survey that utilized Python tools for data cleaning and analysis',
