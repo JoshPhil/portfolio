@@ -113,7 +113,7 @@ const projects: Project[] = [
   }
 ]
 
-const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project, onClick }) => {
+const ProjectCard: React.FC<{ project: Project; onClick: () => void }> = ({ project }) => {
   const [activeImage, setActiveImage] = useState<string | null>(null)
 
   const imageVariants = {
